@@ -6,12 +6,14 @@ class Calculator extends StatefulWidget {
 }
 
 class _CalculatorState extends State<Calculator> {
-  String _output = "0";
-  String _currentInput = "";
-  double _num1 = 0.0;
-  double _num2 = 0.0;
-  String _operator = "";
+  String _output = "0";// Holds the current output displayed on the calculator screen
+  String _currentInput = "";// Holds the current input being entered by the user
+  double _num1 = 0.0;// for the first operand for calculations
+  double _num2 = 0.0;// for the second operand for calculations
+  String _operator = "";//operand for the current location
 
+
+ // Function to handle button press events
   void _buttonPressed(String buttonText) {
     setState(() {
       if (buttonText == "C") {
@@ -23,11 +25,13 @@ class _CalculatorState extends State<Calculator> {
         return;
       } else if (buttonText == "+" || buttonText == "-" || buttonText == "*" ||
           buttonText == "/") {
+       // Handle arithmetic operator button press
         _num1 = double.parse(_currentInput);
         _operator = buttonText;
         _currentInput = "";
         return;
       } else if (buttonText == "=") {
+         // Perform calculation and display result
         _num2 = double.parse(_currentInput);
         switch (_operator) {
           case "+":
@@ -47,13 +51,14 @@ class _CalculatorState extends State<Calculator> {
         _num2 = 0.0;
         _operator = "";
         return;
+        //the pressed button's value to the current input
       } else {
         _currentInput += buttonText;
         _output = _currentInput;
       }
     });
   }
-
+ // Function to build calculator button with specified buttonText
   Widget _buildButton(String buttonText) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 4.0, horizontal: 2.0), // Add vertical and horizontal margins
